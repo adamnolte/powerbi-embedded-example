@@ -25,7 +25,7 @@ https://github.com/Microsoft/PowerBI-JavaScript
 | tenancy-1 | group-1 | 5    |
 | tenancy-1 | group-2 | 15    |
 | tenancy-2 | group-1 | 20    |
-| tenancy-1 | group-2 | 25    |
+| tenancy-2 | group-2 | 25    |
 
 2. As before, create a report in Power BI using that dataset and setup your azure function to give you an embed token to that report.
 3. With the angular app started, include your fitlers into your query string param `http://localhost:4200/?tenancy=tenancy-1&group=group-1`
