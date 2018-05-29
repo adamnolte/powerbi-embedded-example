@@ -16,7 +16,7 @@ export class AppComponent {
     const config = {
       headers: {'Access-Control-Allow-Origin': '*'}
     };
-    const embedGeneratorUrl = 'https://pbi-embed-demo.azurewebsites.net/api/HttpTriggerCSharp1?code=kX9HMUyVMCTNUR5lC14J6Gtc/oPwQhSPMlPA7yyZGREbur525hjmzw==';
+    const embedGeneratorUrl = '<insert azure function url here>';
     // Get the embed token for the power bi report
     axios.get(embedGeneratorUrl, config).then((data) => {
       const models = pbi.models;
