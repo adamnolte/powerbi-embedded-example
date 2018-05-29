@@ -6,6 +6,7 @@ https://github.com/Microsoft/PowerBI-JavaScript
 ## Basic Example
 1. Follow Instructions here to setup power bi report and azure function - https://www.taygan.co/blog/2018/05/14/embedded-analytics-with-power-bi
    * You do not need to setup dedicated capacity.
+   * Note: I have modified the return value from the function slightly in my version of [run.csx](https://github.com/ajnolte12/powerbi-embedded-example/blob/master/azure-function/run.csx)
 2. Replace `var getEmbedToken = "INSERT_YOUR_AZURE_FUNCTION_URL_HERE";` in [jquery-example.html](https://github.com/ajnolte12/powerbi-embedded-example/blob/master/jquery-example.html#L19) with your azure function url.
 3. Load [jquery-example.html](https://github.com/ajnolte12/powerbi-embedded-example/blob/master/jquery-example.html) in your web browser.
 4. Your report should display
