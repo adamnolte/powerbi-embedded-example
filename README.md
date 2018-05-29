@@ -28,7 +28,7 @@ https://github.com/Microsoft/PowerBI-JavaScript
 | tenancy-2 | group-2 | 25    |
 
 2. As before, create a report in Power BI using that dataset and setup your azure function to give you an embed token to that report.
-3. With the angular app started, include your fitlers into your query string param `http://localhost:4200/?tenancy=tenancy-1&group=group-1`
+3. With the angular app started, include your filters into your query string param `http://localhost:4200/?tenancy=tenancy-1&group=group-1`
 4. The filtering logic can be seen in [app.component.ts](https://github.com/ajnolte12/powerbi-embedded-example/blob/master/angular-ui-example/src/app/app.component.ts)
 5. For more information on filtering go to https://github.com/Microsoft/PowerBI-JavaScript/wiki/Filters
 
