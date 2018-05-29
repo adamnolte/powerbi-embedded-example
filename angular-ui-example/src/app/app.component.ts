@@ -49,16 +49,16 @@ export class AppComponent {
 
       // Setup the embedded report with the embed token and url from our request
       const embedConfiguration = {
-          type: 'report',
-          filters: [filter, filter2],
-          id: data.data.ReportId,
-          embedUrl: data.data.EmbedUrl,
-          tokenType: models.TokenType.Embed,
-          accessToken: data.data.EmbedToken,
-          settings: {
-            filterPaneEnabled: true,
-            navContentPaneEnabled: false
-        }
+        type: 'report',
+        filters: [filter, filter2],
+        id: data.data.ReportId,
+        embedUrl: data.data.EmbedUrl,
+        tokenType: models.TokenType.Embed,
+        accessToken: data.data.EmbedToken,
+        /* settings: {
+          filterPaneEnabled: true,
+          navContentPaneEnabled: false
+        } */
       };
 
       // Display 2 reports using the powerbi client
