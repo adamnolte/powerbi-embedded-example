@@ -21,26 +21,28 @@ https://github.com/Microsoft/PowerBI-JavaScript
 ### Using filters
 1. Setup a dataset formatted like the following
 
-| Tenancy   | Group   | size |
-| --------- | ------- | ---- |
-| tenancy-1 | group-1 | 5    |
-| tenancy-1 | group-2 | 15    |
-| tenancy-2 | group-1 | 20    |
-| tenancy-2 | group-2 | 25    |
+| Tenancy   | Industry     | size |
+| --------- | ------------ | ---- |
+| tenancy-1 | Finance      | 5    |
+| tenancy-1 | Energy       | 15    |
+| tenancy-2 | Healthcare   | 20    |
+| tenancy-2 | Construction | 25    |
 
 2. As before, create a report in Power BI using that dataset and setup your azure function to give you an embed token to that report.
 3. With the angular app started, include your filters into your query string param `http://localhost:4200/?tenancy=tenancy-1&group=group-1`
 4. The filtering logic can be seen in [app.component.ts](https://github.com/ajnolte12/powerbi-embedded-example/blob/master/angular-ui-example/src/app/app.component.ts)
 5. For more information on filtering go to https://github.com/Microsoft/PowerBI-JavaScript/wiki/Filters
 
+See below for securely filtering by tenancy
+
 ### Printing a report
 See https://github.com/Microsoft/PowerBI-JavaScript/wiki/Embedding---Basic-interactions#print-a-report
 
 ### Filtering a report by tenancy
 
-To filter by tenancy you will need to implement Row Level Security.
+To filter by tenancy you will need to implement Row Level Security. If you filter by tenancy client side, all the data from every tenancy will be downloaded to the client then filtered creating a security risk. Filtering using RLS lets the power bi service filter by tenancy so only the users tenancy data will be downloaded.
 
 https://community.powerbi.com/t5/Developer/Doubt-about-embed-token-and-filtering/td-p/275045
 https://docs.microsoft.com/en-us/power-bi/service-admin-rls
 
-Then you will pass in the role in your Azure Function (run.csx) when requesting the embed token.
+Then you will pass in the role in your Azure Function [run.csx](https://github.com/ajnolte12/powerbi-embedded-example/blob/master/azure-function/run.csx#L41) when requesting the embed token.

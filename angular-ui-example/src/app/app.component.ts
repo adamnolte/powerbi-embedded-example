@@ -18,7 +18,7 @@ export class AppComponent {
       headers: {'Access-Control-Allow-Origin': '*'}
     };
     const parsedQueryString = queryString.parse(location.search);
-    const embedGeneratorUrl = `<Azure Function Url>?tenancy=${parsedQueryString.tenancy}`;
+    const embedGeneratorUrl = `<Azure Function Url>`;
     // Get the embed token for the power bi report
     axios.get(embedGeneratorUrl, config).then((data) => {
       const models = pbi.models;

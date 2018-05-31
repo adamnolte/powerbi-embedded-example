@@ -20,8 +20,6 @@ static string reportId = ConfigurationManager.AppSettings["PBIE_REPORT_ID"];
 
 public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, TraceWriter log)
 {
-    var queryString = req.GetQueryNameValuePairs().ToDictionary(x => x.Key, x => x.Value);
-
     // Authenticate with Azure Ad > Get Access Token > Get Token Credentials
     var credential = new UserPasswordCredential(username, password);
     var authenticationContext = new AuthenticationContext(authorityUrl);
@@ -38,7 +36,7 @@ public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, TraceW
         // Embed Token
         // The role is passed through as a query string
         // You also need to pass in the dataset id
-        var generateTokenRequestParameters = new GenerateTokenRequest("View", null, identities: new List<EffectiveIdentity> { new EffectiveIdentity(username: username, roles: new List<string> {queryString["tenancy"] }, datasets: new List<string> { "<dataset id>" }) });
+        var generateTokenRequestParameters = new GenerateTokenRequest("View", null, identities: new List<EffectiveIdentity> { new EffectiveIdentity(username: username, roles: new List<string> { "<role>" }, datasets: new List<string> { "<dataset id>" }) });
         EmbedToken embedToken = client.Reports.GenerateTokenInGroup(groupId, reportId, generateTokenRequestParameters);
 
         // JSON Response
