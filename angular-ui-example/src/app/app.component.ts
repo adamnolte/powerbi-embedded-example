@@ -11,46 +11,23 @@ import queryString from 'query-string';
 export class AppComponent {
   private report;
   private report2;
+  private searchTerm = '';
 
   ngOnInit() {
     const config = {
       headers: {'Access-Control-Allow-Origin': '*'}
     };
-    const embedGeneratorUrl = '<insert azure function url here>';
+    const parsedQueryString = queryString.parse(location.search);
+    const embedGeneratorUrl = `<Azure Function Url>?tenancy=${parsedQueryString.tenancy}`;
     // Get the embed token for the power bi report
     axios.get(embedGeneratorUrl, config).then((data) => {
       const models = pbi.models;
       const parsedQueryString = queryString.parse(location.search);
-      let filter = null;
-      let filter2 = null;
-      // if filter set for tenancy and group, set filters on the report
-      if (parsedQueryString.tenancy !== undefined) {
-        filter = {
-          $schema: "http://powerbi.com/product/schema#basic",
-          target: {
-              table: "SampleData",
-              column: "Tenancy"
-          },
-          operator: "Equals",
-          values: [parsedQueryString.tenancy]
-        };
-      }
-      if (parsedQueryString.group !== undefined) {
-        filter2 = {
-          $schema: "http://powerbi.com/product/schema#basic",
-          target: {
-              table: "SampleData",
-              column: "Group"
-          },
-          operator: "Equals",
-          values: [parsedQueryString.group]
-        };
-      }
 
       // Setup the embedded report with the embed token and url from our request
       const embedConfiguration = {
         type: 'report',
-        filters: [filter, filter2],
+        filters: [],
         id: data.data.ReportId,
         embedUrl: data.data.EmbedUrl,
         tokenType: models.TokenType.Embed,
@@ -77,5 +54,23 @@ export class AppComponent {
 
   onPrint2 = () => {
     this.report2.print();
+  }
+
+  onSearch = (term) => {
+    this.searchTerm = term;
+  }
+
+  setFilter = () => {
+    const filter = {
+      $schema: "http://powerbi.com/product/schema#basic",
+      target: {
+          table: "sampledata3",
+          column: "Industry"
+      },
+      operator: "Equals",
+      values: [this.searchTerm]
+    };
+    this.report.setFilters([filter]);
+    this.report2.setFilters([filter]);
   }
 }

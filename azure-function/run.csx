@@ -1,5 +1,3 @@
-// Used from example - https://www.taygan.co/blog/2018/05/14/embedded-analytics-with-power-bi
-
 #r "System.Web.Extensions"
 using System.Configuration;
 using System.Net;
@@ -14,7 +12,6 @@ using Microsoft.Rest;
 static string authorityUrl = "https://login.windows.net/common/oauth2/authorize/";
 static string resourceUrl = "https://analysis.windows.net/powerbi/api";
 static string apiUrl = "https://api.powerbi.com/";
-// Set the following as application settings for your azure function
 static string clientId = ConfigurationManager.AppSettings["PBIE_CLIENT_ID"];
 static string username = ConfigurationManager.AppSettings["PBIE_USERNAME"];
 static string password = ConfigurationManager.AppSettings["PBIE_PASSWORD"];
@@ -23,6 +20,7 @@ static string reportId = ConfigurationManager.AppSettings["PBIE_REPORT_ID"];
 
 public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, TraceWriter log)
 {
+    var queryString = req.GetQueryNameValuePairs().ToDictionary(x => x.Key, x => x.Value);
 
     // Authenticate with Azure Ad > Get Access Token > Get Token Credentials
     var credential = new UserPasswordCredential(username, password);
@@ -30,7 +28,7 @@ public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, TraceW
     var authenticationResult = await authenticationContext.AcquireTokenAsync(resourceUrl, clientId, credential);
     string accessToken = authenticationResult.AccessToken;
     var tokenCredentials = new TokenCredentials(accessToken, "Bearer");
-    Console.Write(tokenCredentials);
+
     using (var client = new PowerBIClient(new Uri(apiUrl), tokenCredentials))
     {
         // Embed URL
@@ -38,7 +36,9 @@ public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, TraceW
         string embedUrl = report.EmbedUrl;
 
         // Embed Token
-        var generateTokenRequestParameters = new GenerateTokenRequest(accessLevel: "view");
+        // The role is passed through as a query string
+        // You also need to pass in the dataset id
+        var generateTokenRequestParameters = new GenerateTokenRequest("View", null, identities: new List<EffectiveIdentity> { new EffectiveIdentity(username: username, roles: new List<string> {queryString["tenancy"] }, datasets: new List<string> { "<dataset id>" }) });
         EmbedToken embedToken = client.Reports.GenerateTokenInGroup(groupId, reportId, generateTokenRequestParameters);
 
         // JSON Response
