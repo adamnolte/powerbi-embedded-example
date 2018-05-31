@@ -41,6 +41,7 @@ See below for securely filtering by tenancy
 See
   * https://github.com/Microsoft/PowerBI-JavaScript/wiki/Embedding---Basic-interactions#print-a-report
   * https://ideas.powerbi.com/forums/265200-power-bi-ideas/suggestions/15295617-allow-printing-from-power-bi-embedded
+  * https://ideas.powerbi.com/forums/265200-power-bi-ideas/suggestions/12288612-print-and-export-embedded-reports-through-rest-api
 
 ### Filtering a report by tenancy
 
