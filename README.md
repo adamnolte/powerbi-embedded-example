@@ -38,7 +38,9 @@ https://github.com/Microsoft/PowerBI-JavaScript
 See below for securely filtering by tenancy
 
 ### Printing a report
-See https://github.com/Microsoft/PowerBI-JavaScript/wiki/Embedding---Basic-interactions#print-a-report
+See
+  * https://github.com/Microsoft/PowerBI-JavaScript/wiki/Embedding---Basic-interactions#print-a-report
+  * https://ideas.powerbi.com/forums/265200-power-bi-ideas/suggestions/15295617-allow-printing-from-power-bi-embedded
 
 ### Filtering a report by tenancy
 
