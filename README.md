@@ -35,3 +35,12 @@ https://github.com/Microsoft/PowerBI-JavaScript
 
 ### Printing a report
 See https://github.com/Microsoft/PowerBI-JavaScript/wiki/Embedding---Basic-interactions#print-a-report
+
+### Filtering a report by tenancy
+
+To filter by tenancy you will need to implement Row Level Security.
+
+https://community.powerbi.com/t5/Developer/Doubt-about-embed-token-and-filtering/td-p/275045
+https://docs.microsoft.com/en-us/power-bi/service-admin-rls
+
+Then you will pass in the role in your Azure Function (run.csx) when requesting the embed token.
