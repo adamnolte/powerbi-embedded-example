@@ -42,7 +42,7 @@ See https://github.com/Microsoft/PowerBI-JavaScript/wiki/Embedding---Basic-inter
 
 ### Filtering a report by tenancy
 
-To filter by tenancy you will need to implement Row Level Security. If you filter by tenancy client side, all the data from every tenancy will be downloaded to the client then filtered creating a security risk. Filtering using RLS lets the power bi service filter by tenancy so only the users tenancy data will be downloaded.
+To filter by tenancy you will need to implement Row Level Security. If you filter by tenancy client side, all the data from every tenancy will be downloaded to the client then filtered creating a security risk. Filtering using RLS lets the Power BI service filter by tenancy so only the users tenancy data will be downloaded.
 
 https://community.powerbi.com/t5/Developer/Doubt-about-embed-token-and-filtering/td-p/275045
 https://docs.microsoft.com/en-us/power-bi/service-admin-rls
